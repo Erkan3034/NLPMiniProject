@@ -1,5 +1,9 @@
 # TechBot - IT Destek Asistanı
 
+## Projenin Amacı
+
+Bu proje, sembolik Doğal Dil İşleme (NLP) tekniklerini kullanarak temel bir IT destek asistanı oluşturmayı amaçlamaktadır. Kullanıcıların yazılı olarak ilettiği sorunları anahtar kelime tabanlı eşleştirme ile tanıyıp, önceden tanımlanmış çözümler sunar. Proje, makine öğrenmesi yerine sembolik (kural tabanlı) yöntemlerle doğal dilde anlam çıkarmanın ve yanıt üretmenin temel prensiplerini öğretmek ve göstermek için hazırlanmıştır.
+
 TechBot, kullanıcıların IT sorunlarını çözmelerine yardımcı olan bir Telegram botudur. Kullanıcılar sorunlarını bildirebilir, yeni çözümler ekleyebilir ve bilinmeyen soruları görüntüleyebilir.
 
 ## Özellikler
