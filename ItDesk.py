@@ -100,13 +100,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 def main() -> None:
     """Bot'u başlatır."""
-    # Telegram API anahtarı sadece ortam değişkeninden alınır
-    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    # Telegram API anahtarı
+    token = "7797161702:AAENmr-u4-fSleicXJXoB73rwporjEYrVxA"
     if not token:
-        print("HATA: TELEGRAM_BOT_TOKEN çevre değişkeni tanımlı değil. Lütfen .env dosyasına veya sistem ortamına ekleyin.")
+        print("HATA: Telegram bot token'ı bulunamadı.")
         exit(1)
     # Bot uygulaması oluşturulur
-    app = ApplicationBuilder().token(token).build()
+    app = ApplicationBuilder().token(token).concurrent_updates(True).build()
     # Konuşma akışlarını yöneten handler (diyalog yönetimi)
     conv_handler = ConversationHandler(
         entry_points=[

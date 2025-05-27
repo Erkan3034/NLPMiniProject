@@ -2,6 +2,7 @@ from typing import Dict, List
 
 # Bilgi tabanı
 bilgi_tabani: Dict[str, str] = {
+    "kağan":"kağan is a programmer",
     "erkan turgut kimdir": "Erkan Turgut, ItDesk'in yöneticisi ve kurucularındadır. Kendisi Yapay Zeka alanında uzmanlaşmaya devam etmektedir.",
     "aslı aydın kimdir": "Aslı Aydın, ItDesk'in yöneticisi ve kurucularındadır. Kendisi Yapay Zeka alanında uzmanlaşmaya devam etmektedir.",
     "merhaba": "Merhaba! Ben TechBot, size teknik destek sunuyorum.",
