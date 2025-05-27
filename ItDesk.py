@@ -5,9 +5,13 @@
 import os  # Ortam değişkenleriyle çalışmak için kullanılır
 import logging  # Hata ve bilgi mesajlarını kaydetmek için kullanılır
 from typing import Optional  # Fonksiyonlarda opsiyonel değerler için
+from dotenv import load_dotenv  # .env dosyasından çevre değişkenlerini yüklemek için
 from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove  # Telegram API nesneleri
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler  # Telegram botu için gerekli modüller
+from telegram.ext import Application, ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler  # Telegram botu için gerekli modüller
 from bilgi_tabani import cevapla, yeni_ifade_ekle, bilinmeyen_ifadeleri_getir  # Bilgi tabanı fonksiyonları
+
+# .env dosyasından çevre değişkenlerini yükle
+load_dotenv()
 
 # Loglama ayarları (hata ve bilgi mesajlarını terminalde gösterir)
 logging.basicConfig(
@@ -100,13 +104,26 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 def main() -> None:
     """Bot'u başlatır."""
-    # Telegram API anahtarı
-    token = "7797161702:AAENmr-u4-fSleicXJXoB73rwporjEYrVxA"
+    # Telegram API anahtarı .env dosyasından alınır
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
     if not token:
-        print("HATA: Telegram bot token'ı bulunamadı.")
+        print("HATA: TELEGRAM_BOT_TOKEN çevre değişkeni .env dosyasında bulunamadı.")
         exit(1)
     # Bot uygulaması oluşturulur
-    app = ApplicationBuilder().token(token).concurrent_updates(True).build()
+    app = (
+        ApplicationBuilder()
+        .token(token)
+        .concurrent_updates(True)
+        .arbitrary_callback_data(True)
+        .build()
+    )
+    
+    # Bot'u başlat
+    async def post_init(application: Application) -> None:
+        await application.bot.initialize()
+    
+    app.post_init = post_init
+    
     # Konuşma akışlarını yöneten handler (diyalog yönetimi)
     conv_handler = ConversationHandler(
         entry_points=[
